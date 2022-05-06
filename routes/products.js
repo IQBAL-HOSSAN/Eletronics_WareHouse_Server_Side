@@ -3,7 +3,7 @@ const Product = require("../models/Product.js");
 const verify = require("../verifyToken");
 
 // CREATE
-router.post("/", verify, async (req, res) => {
+router.post("/", async (req, res) => {
   if (req.user.isAdmin) {
     const newProduct = new Product(req.body);
     try {
@@ -18,7 +18,7 @@ router.post("/", verify, async (req, res) => {
 });
 
 // UPDATE
-router.put("/:id", verify, async (req, res) => {
+router.put("/:id", async (req, res) => {
   //   console.log("upsate");
   if (req.user.isAdmin) {
     try {
@@ -39,7 +39,7 @@ router.put("/:id", verify, async (req, res) => {
 });
 
 // DELETE
-router.delete("/:id", verify, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   if (req.user.isAdmin) {
     try {
       await Product.findByIdAndDelete(req.params.id);
@@ -53,7 +53,7 @@ router.delete("/:id", verify, async (req, res) => {
 });
 
 // GET ONE BY ID
-router.get("/:id", verify, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const products = await Product.findById(req.params.id);
     res.status(200).json(products);
@@ -63,7 +63,7 @@ router.get("/:id", verify, async (req, res) => {
 });
 
 // GET ALL
-router.get("/", verify, async (req, res) => {
+router.get("/", async (req, res) => {
   const query = {};
   try {
     const products = await Product.find(query);
