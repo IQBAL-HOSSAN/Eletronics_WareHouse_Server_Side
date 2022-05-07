@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  if (req.user.isAdmin) {
+  if (req?.user?.isAdmin) {
     // const newProduct = new Product(req.body);
     // try {
     //   const saveProduct = await newProduct.save();
@@ -39,7 +39,7 @@ router.put("/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  if (req.user.isAdmin) {
+  if (req?.user?.isAdmin) {
     // try {
     //   const updatedProduct = await Product.findByIdAndUpdate(
     //     req.params.id,
@@ -65,7 +65,7 @@ router.delete("/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  if (req.user.isAdmin) {
+  if (req?.user?.isAdmin) {
     // try {
     //   await Product.findByIdAndDelete(req.params.id);
     //   res.status(200).json("The Product has been deleted");
