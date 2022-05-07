@@ -6,8 +6,8 @@ const verify = require("../verifyToken");
 router.post("/", async (req, res) => {
   const newProduct = new Product(req.body);
   try {
-    const saveProduct = await newProduct.save();
-    res.status(201).json(saveProduct);
+    const saveProducts = await newProduct.save();
+    res.status(201).json(saveProducts);
   } catch (err) {
     res.status(500).json(err);
   }
