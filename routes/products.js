@@ -4,35 +4,54 @@ const verify = require("../verifyToken");
 
 // CREATE
 router.post("/", async (req, res) => {
+  const newProduct = new Product(req.body);
+  try {
+    const saveProduct = await newProduct.save();
+    res.status(201).json(saveProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
   if (req.user.isAdmin) {
-    const newProduct = new Product(req.body);
-    try {
-      const saveProduct = await newProduct.save();
-      res.status(201).json(saveProduct);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    // const newProduct = new Product(req.body);
+    // try {
+    //   const saveProduct = await newProduct.save();
+    //   res.status(201).json(saveProduct);
+    // } catch (err) {
+    //   res.status(500).json(err);
+    // }
   } else {
-    res.status(403).json("You are not allowed");
+    // res.status(403).json("You are not allowed");
   }
 });
 
 // UPDATE
 router.put("/:id", async (req, res) => {
   //   console.log("upsate");
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
   if (req.user.isAdmin) {
-    try {
-      const updatedProduct = await Product.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
-      );
-      res.status(200).json(updatedProduct);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    // try {
+    //   const updatedProduct = await Product.findByIdAndUpdate(
+    //     req.params.id,
+    //     {
+    //       $set: req.body,
+    //     },
+    //     { new: true }
+    //   );
+    //   res.status(200).json(updatedProduct);
+    // } catch (err) {
+    //   res.status(500).json(err);
+    // }
   } else {
     res.status(403).json("You are not allowed");
   }
@@ -40,13 +59,19 @@ router.put("/:id", async (req, res) => {
 
 // DELETE
 router.delete("/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("The Product has been deleted");
+  } catch (err) {
+    res.status(500).json(err);
+  }
   if (req.user.isAdmin) {
-    try {
-      await Product.findByIdAndDelete(req.params.id);
-      res.status(200).json("The Product has been deleted");
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    // try {
+    //   await Product.findByIdAndDelete(req.params.id);
+    //   res.status(200).json("The Product has been deleted");
+    // } catch (err) {
+    //   res.status(500).json(err);
+    // }
   } else {
     res.status(403).json("You are not allowed");
   }
