@@ -8,6 +8,7 @@ const ProductSchema = mongoose.Schema(
     price: { type: String },
     quantity: { type: String },
     supplierName: { type: String },
+    email: { type: String, required: true },
     year: { type: String },
   },
   {
