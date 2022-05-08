@@ -88,7 +88,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // GET  BY EMAIL ADDRESS
-router.get("/", async (req, res) => {
+router.get("/myItem", async (req, res) => {
   const email = req.query.email;
   const query = { email: email };
   try {
@@ -100,14 +100,14 @@ router.get("/", async (req, res) => {
 });
 
 // GET ALL
-// router.get("/", async (req, res) => {
-//   const query = {};
-//   try {
-//     const products = await Product.find(query);
-//     res.status(200).json(products);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get("/", async (req, res) => {
+  const query = {};
+  try {
+    const products = await Product.find(query);
+    res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
