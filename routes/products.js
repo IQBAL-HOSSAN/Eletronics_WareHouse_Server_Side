@@ -88,7 +88,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // GET  BY EMAIL ADDRESS
-router.get("/myItem", async (req, res) => {
+router.get("/", async (req, res) => {
   const email = req.query.email;
   const query = { email: email };
   try {
