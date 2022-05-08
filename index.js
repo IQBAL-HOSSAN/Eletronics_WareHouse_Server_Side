@@ -8,6 +8,8 @@ const authRouter = require("./routes/auth");
 const userRouter = require("./routes/users");
 const productRouter = require("./routes/products");
 
+const Product = require("./models/Product");
+
 dotenv.config();
 
 // MIDDLEWARE
@@ -32,6 +34,16 @@ app.get("/", (req, res) => {
   res.send("backed server connected");
 });
 
+app.get("/myItem", async (req, res) => {
+  const email = req.query?.email;
+  const query = { email: email };
+  try {
+    const products = await Product.find(query);
+    res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 // USE AND CALL THE API ROUTE
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
