@@ -88,16 +88,16 @@ router.get("/:id", async (req, res) => {
 });
 
 // GET  BY EMAIL ADDRESS
-router.get("/", async (req, res) => {
-  const email = req.query.email;
-  const query = { email: email };
-  try {
-    const products = await Product.find(query);
-    res.status(200).json(products);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get("/", async (req, res) => {
+//   const email = req.query.email;
+//   const query = { email: email };
+//   try {
+//     const products = await Product.find(query);
+//     res.status(200).json(products);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // GET ALL
 router.get("/", async (req, res) => {
