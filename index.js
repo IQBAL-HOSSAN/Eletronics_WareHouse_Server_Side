@@ -11,12 +11,12 @@ const productRouter = require("./routes/products");
 dotenv.config();
 
 // MIDDLEWARE
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
+const corsConfig = {
+  origin: true,
+  credentials: true,
 };
-app.use(cors(corsOptions));
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
 app.use(express.json());
 
 // CONNECT THE MONGODB
